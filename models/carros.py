@@ -27,8 +27,9 @@ notempty=IS_NOT_EMPTY(error_message=e_m['empty'])
 
 # definição da tabela de marcas
 db.define_table('marca',
-                Field('nome', unique=True, notnull=True),
-                format='%(nome)s')
+                Field('nome', unique=True, notnull=True)
+                #format='%(nome)s'
+                )
 
 # validadores da tabela de marcas
 db.marca.nome.requires=[notempty, IS_NOT_IN_DB(db, 'marca.nome',error_message=e_m['in_db'])]
