@@ -36,7 +36,7 @@ PROJECT_PATH=os_path.sep.join(os_path_abspath(__file__).split(os_path.sep)[:-2])
 # Pasta atual, onde o run_tests.py está
 ROOT_PATH=os_path.dirname(__file__)
 #adiciona no sys.path os diretorios que contém arquivos ou módulos a serem testados
-mods=['controllers','modules']
+mods=['controllers','modules','models']
 for m in mods:
     sys_path_append(os_path_abspath(PROJECT_PATH+'/'+m))
 

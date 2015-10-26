@@ -7,22 +7,26 @@ from unittest import TestCase
 # importa o Mock, para a criação dos objetos falsos.
 from mock import Mock
 
-from gluon.cache import Cache 
-from gluon.globals import Request 
-from gluon.globals import Response 
-from gluon.globals import Session  
+# from gluon.cache import Cache 
+# from gluon.globals import Request 
+# from gluon.globals import Response 
+# from gluon.globals import Session  
 
-from gluon.http import HTTP 
-from gluon.sql import DAL 
-from gluon.sql import Field 
-from gluon.sql import SQLDB 
-from gluon.sqlhtml import SQLFORM 
+# from gluon.http import HTTP 
+# from gluon.sql import DAL 
+# from gluon.sql import Field 
+# from gluon.sql import SQLDB 
+# from gluon.sqlhtml import SQLFORM 
 
-from gluon.http import redirect 
+# from gluon.http import redirect 
 
-from gluon.validators import * 
-from gluon.html import * 
+# from gluon.validators import * 
+# from gluon.html import * 
 
+from imports import *
+
+#new 
+import importlib
 
 class W2PTestCase(TestCase):
 	def setUp(self,*controllers):
@@ -36,11 +40,34 @@ class W2PTestCase(TestCase):
 			c.session=Session()
 
 			c.redirect=redirect
-			c.db=DAL('sqlite://storage.sqlite', pool_size=1, check_reserved=['all'])
+			c.db=DAL('sqlite://tests/db_test.sqlite', pool_size=1, check_reserved=['all'])
 
 			import_classes(c)
 			import_gluon_validators(c)
 			import_gluon_html(c)
+
+#new
+# def import_lib(package):
+
+# 	imp = importlib.import_module(package)
+
+# 	return imp
+
+def import_exec():
+	from gluon.validators import * 
+	print "\n\n G:"
+	print globals()
+	print "\n\n L:"
+	print locals()
+	print "\n\n C:"
+	import carros
+	print "\n\n"
+
+	variables= {}
+	filename = "/docs/projects/web2py/applications/lojadecarro"
+	execfile(filename+"/models/carros.py",variables)
+
+	return variables
 
 	
 # objeto fake do T

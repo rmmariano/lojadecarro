@@ -1,5 +1,24 @@
 # coding: utf8
 
+from gluon.validators import * 
+from gluon.sql import DAL 
+
+e_m={
+    'empty':'Este campo é obrigatório',
+    'in_db':'Este registro já existe no banco de dados',
+    'not_in_db':'Este registro não existe no banco de dados',
+    'email':'Você precisa inserir um e-mail válido',
+    'image':'O arquivo precisa ser uma imagem válida',
+    'not_in_set':'Você precisa escolher um valor válido',
+    'not_in_range':'Digite um número entre %(min)s e %(max)s',
+    }
+
+if 'db' not in locals():
+    db = DAL('sqlite://temp.sqlite')
+
+
+
+
 # criamos um validador pré definido
 notempty=IS_NOT_EMPTY(error_message=e_m['empty'])
 

@@ -112,8 +112,9 @@ def pesquisa():
                     
     else:
         return ''
-    
-@auth.requires_login()    
+   
+
+#@auth.requires_login()    
 def admin():
     args = request.args
     titulo = 'administração'
