@@ -5,18 +5,7 @@ from w2ptests import W2PTestCase
 from w2ptests import import_exec
 
 import default
-
-# def identity(ob):
-#     return ob
-
-# @identity
-# def myfunc():
-#     print "my function"
-
-# def foo(ob):
-#      return ob
-
-
+import carros
 
 class TestCtlDefault(W2PTestCase):
 	def setUp(self):

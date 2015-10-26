@@ -33,11 +33,11 @@ class W2PTestCase(TestCase):
 		for c in controllers:
 			c.T=Mock(side_effect=__T__)
 
-			c.request=Request() # = web2py 2.1.1
+			c.request=request # = web2py 2.1.1
 			#c.request=Request({}) # > web2py 2.1.1
-			c.cache=Cache(c.request)
-			c.response=Response()
-			c.session=Session()
+			c.cache=cache
+			c.response=response
+			c.session=session
 
 			c.redirect=redirect
 			c.db=DAL('sqlite://tests/db_test.sqlite', pool_size=1, check_reserved=['all'])

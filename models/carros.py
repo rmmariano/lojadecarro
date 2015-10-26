@@ -1,8 +1,5 @@
 # coding: utf8
 
-from gluon.validators import * 
-from gluon.sql import DAL 
-
 e_m={
     'empty':'Este campo é obrigatório',
     'in_db':'Este registro já existe no banco de dados',
@@ -13,8 +10,16 @@ e_m={
     'not_in_range':'Digite um número entre %(min)s e %(max)s',
     }
 
+config=dict(nmsite='Loja de Carro', dscsite='Só os melhores carros')
+
+estados=('Novo', 'Usado')
+
+cores=('Azul', 'Amarelo', 'Verde', 'Vermelho',\
+    'Prata', 'Branco', 'Preto', 'Vinho')
+
+# add
 if 'db' not in locals():
-    db = DAL('sqlite://temp.sqlite')
+    from imports import *
 
 
 
@@ -28,8 +33,7 @@ db.define_table('marca',
                 format='%(nome)s')
 
 # validadores da tabela de marcas
-db.marca.nome.requires=[notempty, IS_NOT_IN_DB(db, 'marca.nome',
-                                               error_message=e_m['in_db'])]
+db.marca.nome.requires=[notempty, IS_NOT_IN_DB(db, 'marca.nome',error_message=e_m['in_db'])]
 
 
 # definição da tabela de carros
@@ -40,10 +44,9 @@ db.define_table('carro',
                 Field('cor', notnull=True),
                 Field('valor', 'double'),
                 Field('itens', 'list:string'),
-                Field('estado', notnull=True),
-                Field('desc', 'text'),
-                Field('foto', 'upload'),
-                format='%(modelo)s - %(ano)s - %(estado)s'
+                Field('estado', notnull=True)
+                # Field('foto', 'upload'),
+                # format='%(modelo)s - %(ano)s - %(estado)s'               
                 )
 
 # validação da tabela carro
@@ -56,9 +59,7 @@ db.carro.cor.requires=IS_IN_SET(cores)
 db.carro.itens.requires=IS_IN_SET(('Alarme','Trava','Som', 'Ar'),multiple=True,
                                   error_message=e_m['not_in_set'])
 db.carro.estado.requires=IS_IN_SET(estados,error_message=e_m['not_in_set'])
-db.carro.foto.requires=IS_EMPTY_OR(IS_IMAGE(extensions=('jpeg', 'png', '.gif'),
-                                            error_message=e_m['image']))
-
+#db.carro.foto.requires=IS_EMPTY_OR(IS_IMAGE(extensions=('jpeg', 'png', '.gif'),error_message=e_m['image']))
 
 # definição da tabela de compradores
 db.define_table('comprador',
@@ -67,8 +68,8 @@ db.define_table('comprador',
                 Field('email'),
                 Field('telefone'),
                 Field('financiar','boolean'),
-                Field('troca','boolean'),
-                Field('data', 'datetime', default=request.now)
+                Field('troca','boolean')
+                #Field('data', 'datetime', default=request.now)
                 )
 
 # validação da tabela de compradores
@@ -82,5 +83,5 @@ db.comprador.email.label = 'Seu endereço de e-mail'
 db.comprador.telefone.label = 'Seu telefone'
 db.comprador.financiar.label = 'Quero financiar'
 db.comprador.troca.label = 'Quero dar outro carro em troca'
-db.comprador.data.writable=False
-db.comprador.data.readable=False
+# db.comprador.data.writable=False
+# db.comprador.data.readable=False
