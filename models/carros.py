@@ -1,5 +1,9 @@
 # coding: utf8
 
+# Se estiver em teste, faz os imports automáticos
+if 'db' not in locals():
+    from imports import *
+
 e_m={
     'empty':'Este campo é obrigatório',
     'in_db':'Este registro já existe no banco de dados',
@@ -16,12 +20,6 @@ estados=('Novo', 'Usado')
 
 cores=('Azul', 'Amarelo', 'Verde', 'Vermelho',\
     'Prata', 'Branco', 'Preto', 'Vinho')
-
-# add
-if 'db' not in locals():
-    from imports import *
-
-
 
 
 # criamos um validador pré definido
@@ -44,7 +42,8 @@ db.define_table('carro',
                 Field('cor', notnull=True),
                 Field('valor', 'double'),
                 Field('itens', 'list:string'),
-                Field('estado', notnull=True)
+                Field('estado', notnull=True),
+                Field('descr', 'text')
                 # Field('foto', 'upload'),
                 # format='%(modelo)s - %(ano)s - %(estado)s'               
                 )

@@ -10,7 +10,7 @@ def VITRINE(rows):
         <div class='vcfoto' style='float:left;margin:10px;'>
             <a href='%(url)s'>        
                 <img border='0' width='100px' height='100px'
-                    src='%(urlfoto)s'>
+                    src=''>
             </a>
         </div>
         <div class='vcdados' style='padding:10px;margin:10px;'>
@@ -28,7 +28,7 @@ def VITRINE(rows):
             </div>
             <p class='vcdtexto'>
                 <blockquote>
-                %(desc)s
+                %(descr)s
                 </blockquote>
             </p>
             <span class='vcdvalor' 
@@ -42,14 +42,13 @@ def VITRINE(rows):
     #Caso existam registros em "rows" efetua a interpolação
     if rows:
         vitrine = [placeholder % dict(url=URL('detalhes', args=row.id),\
-                                    urlfoto=URL('download',args=row.foto),\
                                     marca=row.marca.nome,\
                                     modelo=row.modelo,\
                                     ano=row.ano,\
                                     estado=row.estado,\
                                     cor=row.cor,\
                                     itens=' | '.join(row.itens),\
-                                    desc=row.desc,\
+                                    descr=row.descr,\
                                     valor=Moeda(row.valor),\
                                     ) for row in rows ]
                                 
