@@ -1,6 +1,8 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+print "\nHUEHUE -- 1\n"
+
 from w2ptests import W2PTestCase
 
 # Importa o controller a ser testado
@@ -10,13 +12,17 @@ import default
 import carros
 #import vitrine
 
+print "\nHUEHUE -- 2\n"
+
 class TestCtlDefault(W2PTestCase):
 	def setUp(self):
 		W2PTestCase.setUp(self,default)
-		default.db = carros.db
+		#default.db = carros.db
 
 	def test_index(self):
-		inicializarDb(default.db)
+		print "\nHUEHUE -- 3\n"
+		#inicializarDb(carros.db)
+		print "\nHUEHUE -- 4\n"
 
 
 		self.assertEqual('55','55')

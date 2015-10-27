@@ -5,6 +5,8 @@
 
 from os import path
 from os import remove
+from glob import glob
+#from sys import exit
 
 # Pasta anterior a pasta atual (raiz projeto)
 PROJECT_PATH=path.sep.join(path.abspath(__file__).split(path.sep)[:-2])
@@ -31,6 +33,12 @@ cache = Cache(request)
 
 filename='tests/db_test.sqlite'
 
+# Exclui todos os arquivos da base de dados de teste
 delete_file(PROJECT_PATH+'/'+filename)
+delete_file(PROJECT_PATH+'/sql.log')
+files = glob(PROJECT_PATH+'/*.table')
+for f in files:
+	print delete_file(f)
 
-db = DAL('sqlite://'+filename, pool_size=1, check_reserved=['all'])
+#db = DAL('sqlite://'+filename, pool_size=1, check_reserved=['all'])
+db = DAL('sqlite://'+filename)

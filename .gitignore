@@ -8,8 +8,8 @@ errors/*
 databases/*
 sessions/*
 cache/*
-*/db_test.sqlite
-temp.sqlite
+*/db_test.sqlite*
+temp.sqlite*
 storage.sqlite
 static/temp
 progress.log

@@ -34,7 +34,6 @@ db.define_table('marca',
 # validadores da tabela de marcas
 db.marca.nome.requires=[notempty, IS_NOT_IN_DB(db, 'marca.nome',error_message=e_m['in_db'])]
 
-
 # definição da tabela de carros
 db.define_table('carro',
                 Field('marca', db.marca, notnull=True),
@@ -85,3 +84,13 @@ db.comprador.financiar.label = 'Quero financiar'
 db.comprador.troca.label = 'Quero dar outro carro em troca'
 # db.comprador.data.writable=False
 # db.comprador.data.readable=False
+
+print "\nHUEHUE -- CARROS 1\n"
+
+id_marca1 = db.marca.insert(nome="marca1")
+id_marca2 = db.marca.insert(nome="marca2")
+
+db.carro.insert(marca=id_marca1,modelo="modelo1",ano=1950,estado="Novo",
+                    cor="Preto",valor=30.000,descr="um carro preto")
+
+print "\nHUEHUE -- CARROS 2\n"
