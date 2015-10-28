@@ -14,13 +14,14 @@ class W2PTestCase(TestCase):
 	def setUp(self,*controllers):
 		for c in controllers:
 			c.T=Mock(side_effect=__T__)
+			c.URL=Mock(side_effect=__URL__)
+			c.IS_URL=Mock(side_effect=__IS_URL__)
 
 			c.request=request # = web2py 2.1.1
 			#c.request=Request({}) # > web2py 2.1.1
 			c.cache=cache
 			c.response=response
 			c.session=session
-
 			c.redirect=redirect
 			c.db=db
 
@@ -28,11 +29,34 @@ class W2PTestCase(TestCase):
 			import_gluon_validators(c)
 			import_gluon_html(c)
 
+	def inside(self,a,b):
+		if str(a) in str(b):
+			return True
+		return False
 	
 # objeto fake do T
 def __T__(f):
 	return f
-			
+
+#URL('detalhes', args=row.id)
+# new
+# objeto fake do URL
+def __URL__(foo,**dfoo):
+	foo = 'http://'+str(foo)
+	#hu = dict(sorted(dfoo.items(), key=lambda x: x[0]))
+	#from operator import itemgetter
+	#hu = sorted(dfoo.items(), key=itemgetter(0))
+	for f in dfoo:
+		foo=foo+'/'+str(dfoo[f])
+	return foo
+
+def __IS_URL__(foo,**dfoo):
+	foo = str(foo)
+	if foo.startswith('http://') or foo.startswith('https://'):
+		return True
+	return False
+
+
 def import_classes(mod):
 	mod.Request=Request
 	mod.Cache=Cache
@@ -46,6 +70,8 @@ def import_classes(mod):
 	mod.SQLFORM=SQLFORM
 
 def import_gluon_validators(mod):
+	#mod.IS_URL=IS_URL # criado mock para ele
+
 	mod.CLEANUP=CLEANUP
 	mod.CRYPT=CRYPT
 	mod.IS_ALPHANUMERIC=IS_ALPHANUMERIC
@@ -76,7 +102,6 @@ def import_gluon_validators(mod):
 	mod.IS_TIME=IS_TIME
 	mod.IS_UPLOAD_FILENAME=IS_UPLOAD_FILENAME
 	mod.IS_UPPER=IS_UPPER
-	mod.IS_URL=IS_URL
 
 	# não funcionam quando usados dentro do virtualenv utilizando o gluon do web2py
 	# que foi instalado (pip install web2py)
@@ -87,6 +112,8 @@ def import_gluon_validators(mod):
 	# mod.IS_LIST_OF_EMAILS=IS_LIST_OF_EMAILS
 
 def import_gluon_html(mod):
+	#mod.URL=URL # criado mock para ele
+
 	mod.A=A
 	mod.B=B
 	mod.BEAUTIFY=BEAUTIFY
@@ -147,7 +174,6 @@ def import_gluon_html(mod):
 	mod.TR=TR
 	mod.TT=TT
 	mod.UL=UL
-	mod.URL=URL
 	mod.XHTML=XHTML
 	mod.XML=XML
 	mod.embed64=embed64

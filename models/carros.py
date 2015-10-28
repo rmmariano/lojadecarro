@@ -85,12 +85,10 @@ db.comprador.troca.label = 'Quero dar outro carro em troca'
 # db.comprador.data.writable=False
 # db.comprador.data.readable=False
 
-print "\nHUEHUE -- CARROS 1\n"
 
-id_marca1 = db.marca.insert(nome="marca1")
-id_marca2 = db.marca.insert(nome="marca2")
+# id_marca1 = db.marca.insert(nome="marca1")
+# id_marca2 = db.marca.insert(nome="marca2")
 
-db.carro.insert(marca=id_marca1,modelo="modelo1",ano=1950,estado="Novo",
-                    cor="Preto",valor=30.000,descr="um carro preto")
+# db.carro.insert(marca=id_marca1,modelo="modelo1",ano=1950,estado="Novo",
+#                     cor="Preto",valor=30.000,descr="um carro preto")
 
-print "\nHUEHUE -- CARROS 2\n"

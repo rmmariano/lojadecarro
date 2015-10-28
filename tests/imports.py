@@ -33,12 +33,13 @@ cache = Cache(request)
 
 filename='tests/db_test.sqlite'
 
-# Exclui todos os arquivos da base de dados de teste
-delete_file(PROJECT_PATH+'/'+filename)
+# Exclui todos os arquivos da base de dados de teste que são temporários
 delete_file(PROJECT_PATH+'/sql.log')
 files = glob(PROJECT_PATH+'/*.table')
 for f in files:
-	print delete_file(f)
+	delete_file(f)
+files = glob(PROJECT_PATH+'/'+filename+'*')
+for f in files:
+	delete_file(f)
 
-#db = DAL('sqlite://'+filename, pool_size=1, check_reserved=['all'])
 db = DAL('sqlite://'+filename)

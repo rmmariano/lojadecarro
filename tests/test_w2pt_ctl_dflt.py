@@ -1,32 +1,41 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-print "\nHUEHUE -- 1\n"
-
 from w2ptests import W2PTestCase
 
 # Importa o controller a ser testado
 import default
 # Importa os modelos a serem utilizados
-#import _web2py_brasil_utils
+import _web2py_brasil_utils
+import vitrine
 import carros
-#import vitrine
 
-print "\nHUEHUE -- 2\n"
 
 class TestCtlDefault(W2PTestCase):
 	def setUp(self):
-		W2PTestCase.setUp(self,default)
-		#default.db = carros.db
+		W2PTestCase.setUp(self,default,vitrine)
+		construirDependencias()
 
 	def test_index(self):
-		print "\nHUEHUE -- 3\n"
-		#inicializarDb(carros.db)
-		print "\nHUEHUE -- 4\n"
+		inicializarDb(default.db)
 
+		query=default.db.carro.id>0
+		rows=default.db(query).select(orderby=default.db.carro.id) 
 
-		self.assertEqual('55','55')
+		result=default.index()
 
+		self.assertEqual(result['titulo'],'Ofertas')
+		for row in rows:
+			self.assertEqual(True,self.inside(default.URL('detalhes', args=row.id),result['vitrine']))
+			self.assertEqual(True,self.inside(row.marca,result['vitrine']))
+			self.assertEqual(True,self.inside(row.modelo,result['vitrine']))
+			self.assertEqual(True,self.inside(row.ano,result['vitrine']))
+			self.assertEqual(True,self.inside(row.estado,result['vitrine']))
+			self.assertEqual(True,self.inside(row.cor,result['vitrine']))
+			for item in row.itens:
+				self.assertEqual(True,self.inside(item,result['vitrine']))	
+			self.assertEqual(True,self.inside(row.descr,result['vitrine']))
+			self.assertEqual(True,self.inside(_web2py_brasil_utils.Moeda(row.valor),result['vitrine']))
 
 	# def test_carros(self):
 	# 	self.assertEqual('Text','Text')
@@ -37,27 +46,19 @@ class TestCtlDefault(W2PTestCase):
 	# def test_admin(self):
 	# 	self.assertEqual('55','55')
 
-	# def test_cfib(self):
-	# 	self.assertEqual(default.cfib()['message'],'55')
-	# def test_text(self):
-	# 	self.assertEqual(default.ctext()['text'],'Text')
-
 
 def inicializarDb(__db__):
 	id_marca1 = __db__.marca.insert(nome="marca1")
 	id_marca2 = __db__.marca.insert(nome="marca2")
 
-	__db__.carro.insert(marca=id_marca1,modelo="modelo1",ano=1950,
-						cor="preto",valor=30.000,descr="um carro preto")
+	__db__.carro.insert(marca=id_marca1,modelo="modelo1",ano=1950,estado="Novo",
+						cor="Preto",valor=30000,descr="um carro preto novo",
+						itens=['item1','item2'])
+	__db__.carro.insert(marca=id_marca2,modelo="modelo2",ano=1950,estado="Usado",
+						cor="Azul",valor=20000,descr="um carro azul usado",
+						itens=['item3'])
 
-
-
-# db.define_table('carro',
-#                 Field('marca', db.marca, notnull=True),
-#                 Field('modelo', notnull=True),
-#                 Field('ano', 'integer', notnull=True),
-#                 Field('cor', notnull=True),
-#                 Field('valor', 'double'),
-#                 Field('itens', 'list:string'),
-#                 Field('estado', notnull=True),
-#                 Field('descr', 'text')
+def construirDependencias():
+	default.db=carros.db
+	vitrine.Moeda=_web2py_brasil_utils.Moeda
+	default.VITRINE=vitrine.VITRINE
