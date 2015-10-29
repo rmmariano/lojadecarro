@@ -8,7 +8,6 @@ from common import *
 from os import path
 from os import remove
 from glob import glob
-#from sys import exit
 
 from gluon.cache import Cache 
 from gluon.globals import Request, Response, Session
@@ -23,26 +22,33 @@ response = Response()
 session = Session()
 cache = Cache(request)
 
+deleteDB()
 
-# # Pasta anterior a pasta atual (raiz projeto)
-# PROJECT_PATH=path.sep.join(path.abspath(__file__).split(path.sep)[:-2])
-
-# FILENAME='tests/db_test.sqlite'
-
-# def delete_file(filepath):
-#     try:
-#         remove(filepath)
-#     except:
-#     	print '\nWARNING: Not found the file: '+filepath+'\n'
-
-# # Exclui todos os arquivos da base de dados de teste que são temporários
-delete_file(PROJECT_PATH+'/sql.log')
-files = glob(PROJECT_PATH+'/*.table')
-for f in files:
-	delete_file(f)
-files = glob(PROJECT_PATH+'/'+FILENAME+'*')
-for f in files:
-	delete_file(f)
+db = DAL('sqlite://'+DB_PATH)
 
 
-db = DAL('sqlite://'+FILENAME)
+
+
+# # Alguns imports globais do web2py
+
+# # Ja feitos
+# from gluon.cache import Cache 
+# from gluon.globals import Request 
+# from gluon.globals import Response 
+# from gluon.globals import Session  
+# request = Request() #request = Request({})
+# cache = Cache() #cache = Cache(request)
+# response = Response() #funciona sem parametro
+# session = Session()  #funciona sem parametro
+# from gluon.html import * 
+# from gluon.http import HTTP 
+# from gluon.http import redirect 
+# from gluon.sql import DAL 
+# from gluon.sql import Field 
+# from gluon.sql import SQLDB 
+# from gluon.sqlhtml import SQLFORM 
+# from gluon.validators import * 
+
+# # Dão erro
+# import gluon.languages.translator as T #error
+# from gluon.contrib.gql import GQLDB #error

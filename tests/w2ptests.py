@@ -10,10 +10,7 @@ from mock import Mock
 # importa os imports automáticos do web2py
 from global_imports import *
 
-class W2PTestCase(TestCase):
-	PROJECT_PATH=path.sep.join(path.abspath(__file__).split(path.sep)[:-2])
-	filename='tests/db_test.sqlite'
-	
+class W2PTestCase(TestCase):	
 	def setUp(self,*controllers):
 		for c in controllers:
 			c.db=None
@@ -33,46 +30,28 @@ class W2PTestCase(TestCase):
 			import_gluon_validators(c)
 			import_gluon_html(c)
 
-	# def tearDown(self):
-	# 	print '\nteardown--------------------------\n'
-	# 	self.clearDB()
-
-	# def clearDB(self):
-	# 	delete_file(self.PROJECT_PATH+'/sql.log')
-	# 	files = glob(self.PROJECT_PATH+'/*.table')
-	# 	for f in files:
-	# 		delete_file(f)
-	# 	files = glob(self.PROJECT_PATH+'/'+self.filename+'*')
-	# 	for f in files:
-	# 		delete_file(f)
-
 	def inside(self,a,b):
 		if str(a) in str(b):
 			return True
 		return False
 	
-# objeto fake do T
+# função fake do T
 def __T__(f):
 	return f
 
-#URL('detalhes', args=row.id)
-# new
-# objeto fake do URL
+# função fake do URL
 def __URL__(foo,**dfoo):
 	foo = 'http://'+str(foo)
-	#hu = dict(sorted(dfoo.items(), key=lambda x: x[0]))
-	#from operator import itemgetter
-	#hu = sorted(dfoo.items(), key=itemgetter(0))
 	for f in dfoo:
 		foo=foo+'/'+str(dfoo[f])
 	return foo
 
+# função fake do IS_URL
 def __IS_URL__(foo,**dfoo):
 	foo = str(foo)
 	if foo.startswith('http://') or foo.startswith('https://'):
 		return True
 	return False
-
 
 def import_classes(mod):
 	mod.Request=Request
@@ -200,50 +179,3 @@ def import_gluon_html(mod):
 	# que foi instalado (pip install web2py)
 	#mod.ASSIGNJS=ASSIGNJS
 
-
-# W2PTestCase herda da TestCase
-# class W2PTestCase(TestCase):
-# 	# Inicia os atributos do W2PTestCase, criando os mocks necessarios para os
-# 	# imports automaticos do web2py
-# 	def setUp(self,*controllers):
-# 		for c in controllers:
-# 			# Quando T() for chamado, será retornado o valor que entrar, porque não é necessário
-# 			# testar a funcionalidade do T(), pois é uma função do sistema, não do desenvolvedor.
-# 			c.T=Mock(side_effect=__T__)
-# 			# objeto fake do cache
-# 			c.cache=Mock()
-# 			# objeto fake do request
-# 			c.request=Mock()
-# 			# objeto fake do response
-# 			c.response=Mock()
-# 			# objeto fake do session
-# 			c.session=Mock()
-
-
-# d = dir()
-# for i in d:
-# 	print 'mod.'+i+'='+i
-
-# # Alguns imports globais do web2py
-
-# # Ja feitos
-# from gluon.cache import Cache 
-# from gluon.globals import Request 
-# from gluon.globals import Response 
-# from gluon.globals import Session  
-# request = Request() #request = Request({})
-# cache = Cache() #cache = Cache(request)
-# response = Response() #funciona sem parametro
-# session = Session()  #funciona sem parametro
-# from gluon.html import * 
-# from gluon.http import HTTP 
-# from gluon.http import redirect 
-# from gluon.sql import DAL 
-# from gluon.sql import Field 
-# from gluon.sql import SQLDB 
-# from gluon.sqlhtml import SQLFORM 
-# from gluon.validators import * 
-
-# # Dão erro
-# import gluon.languages.translator as T #error
-# from gluon.contrib.gql import GQLDB #error
