@@ -11,8 +11,13 @@ from mock import Mock
 from imports import *
 
 class W2PTestCase(TestCase):
+	PROJECT_PATH=path.sep.join(path.abspath(__file__).split(path.sep)[:-2])
+	filename='tests/db_test.sqlite'
+	
 	def setUp(self,*controllers):
 		for c in controllers:
+			c.db=None
+
 			c.T=Mock(side_effect=__T__)
 			c.URL=Mock(side_effect=__URL__)
 			c.IS_URL=Mock(side_effect=__IS_URL__)
@@ -23,11 +28,23 @@ class W2PTestCase(TestCase):
 			c.response=response
 			c.session=session
 			c.redirect=redirect
-			c.db=db
 
 			import_classes(c)
 			import_gluon_validators(c)
 			import_gluon_html(c)
+
+	# def tearDown(self):
+	# 	print '\nteardown--------------------------\n'
+	# 	self.clearDB()
+
+	# def clearDB(self):
+	# 	delete_file(self.PROJECT_PATH+'/sql.log')
+	# 	files = glob(self.PROJECT_PATH+'/*.table')
+	# 	for f in files:
+	# 		delete_file(f)
+	# 	files = glob(self.PROJECT_PATH+'/'+self.filename+'*')
+	# 	for f in files:
+	# 		delete_file(f)
 
 	def inside(self,a,b):
 		if str(a) in str(b):

@@ -10,6 +10,7 @@ sessions/*
 cache/*
 */db_test.sqlite*
 temp.sqlite*
+dummy.db
 storage.sqlite
 static/temp
 progress.log

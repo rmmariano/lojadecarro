@@ -1,8 +1,9 @@
 # coding: utf8
 
-# Se estiver em teste, faz os imports automáticos
-if 'db' not in locals():
+# Se estiver em teste, faz os imports automáticos para inicializá-lo
+if 'db' not in globals():
     from imports import *
+
 
 e_m={
     'empty':'Este campo é obrigatório',
