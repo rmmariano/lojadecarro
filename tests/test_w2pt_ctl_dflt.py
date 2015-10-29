@@ -1,8 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-from py_compile import compile as recompile
-
 from w2ptests import W2PTestCase
 
 # Importa o controller a ser testado
@@ -10,10 +8,6 @@ import default
 # Importa os modelos a serem utilizados
 import _web2py_brasil_utils
 import vitrine
-
-from importlib import import_module
-
-#carros = None
 import carros
 
 class TestCtlDefault(W2PTestCase):

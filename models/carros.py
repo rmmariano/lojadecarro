@@ -2,7 +2,7 @@
 
 # Se estiver em teste, faz os imports automáticos para inicializá-lo
 if 'db' not in globals():
-    from imports import *
+    from global_imports import *
 
 
 e_m={

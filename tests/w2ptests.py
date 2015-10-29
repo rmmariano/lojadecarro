@@ -8,7 +8,7 @@ from unittest import TestCase
 from mock import Mock
 
 # importa os imports automáticos do web2py
-from imports import *
+from global_imports import *
 
 class W2PTestCase(TestCase):
 	PROJECT_PATH=path.sep.join(path.abspath(__file__).split(path.sep)[:-2])
