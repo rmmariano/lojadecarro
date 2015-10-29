@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+# Importa a classe de teste W2PTestCase do pacote w2ptests
 from w2ptests import W2PTestCase
 
 # Importa o controller a ser testado

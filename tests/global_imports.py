@@ -1,6 +1,8 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+from common import *
+
 # Imports automáticos
 
 from os import path
@@ -21,16 +23,17 @@ response = Response()
 session = Session()
 cache = Cache(request)
 
-# Pasta anterior a pasta atual (raiz projeto)
-PROJECT_PATH=path.sep.join(path.abspath(__file__).split(path.sep)[:-2])
 
-FILENAME='tests/db_test.sqlite'
+# # Pasta anterior a pasta atual (raiz projeto)
+# PROJECT_PATH=path.sep.join(path.abspath(__file__).split(path.sep)[:-2])
 
-def delete_file(filepath):
-    try:
-        remove(filepath)
-    except:
-    	print '\nWARNING: Not found the file: '+filepath+'\n'
+# FILENAME='tests/db_test.sqlite'
+
+# def delete_file(filepath):
+#     try:
+#         remove(filepath)
+#     except:
+#     	print '\nWARNING: Not found the file: '+filepath+'\n'
 
 # # Exclui todos os arquivos da base de dados de teste que são temporários
 delete_file(PROJECT_PATH+'/sql.log')
