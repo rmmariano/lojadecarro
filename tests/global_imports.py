@@ -51,7 +51,6 @@ def initVars():
 	current.cache = cache = Cache(request)
 	current.T = T = m__T__
 
-
 initVars()
 
 deleteDB()

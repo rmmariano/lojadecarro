@@ -12,6 +12,7 @@ from global_imports import *
 
 class W2PTestCase(TestCase):	
 	def setUp(self,*controllers):
+		#initVars()
 		for c in controllers:
 			c.db=None
 
@@ -24,6 +25,12 @@ class W2PTestCase(TestCase):
 			c.cache=Cache(request)
 			c.response=Response()
 			c.session=Session()
+
+			# c.request=request
+			# c.cache=cache
+			# c.response=response
+			# c.session=session
+
 			c.redirect=redirect
 
 			import_classes(c)
