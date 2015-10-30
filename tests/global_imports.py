@@ -37,11 +37,22 @@ def m__IS_URL__(foo,**dfoo):
 	return False
 
 
-current.request = request = Request()
-current.response = response = Response()
-current.session = session = Session()
-current.cache = cache = Cache(request)
-current.T = T = m__T__
+current.request = request = None
+current.response = response = None
+current.session = session = None
+current.cache = cache = None
+current.T = T = None
+
+def initVars():
+	global current, request, response, session, cache, T
+	current.request = request = Request()
+	current.response = response = Response()
+	current.session = session = Session()
+	current.cache = cache = Cache(request)
+	current.T = T = m__T__
+
+
+initVars()
 
 deleteDB()
 
