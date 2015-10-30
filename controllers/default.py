@@ -1,4 +1,5 @@
-# -*- coding: utf-8 -*- 
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
 
 #########################################################################
 ## This is a samples controller
@@ -107,7 +108,7 @@ def pesquisa():
         rows = db(db.carro.modelo.like('%'+txt+'%')).select()
         
         #retorna um <ul><li>..
-        return XML(UL(*[LI(A('%s - %s ' % (row.modelo,row.ano),_href=URL('detalhes',args=row.id)))\
+        return XML(UL(*[LI(A('%s - %s' % (row.modelo,row.ano),_href=URL('detalhes',args=row.id)))\
                     for row in rows]))
                     
     else:
@@ -118,6 +119,7 @@ def pesquisa():
 def admin():
     args = request.args
     titulo = 'administração'
+
     if not args:
         link = UL(*[LI(A(tab,_href=URL(args=tab))) for tab in db.tables])
         return dict(items=link,titulo=titulo)
@@ -125,7 +127,7 @@ def admin():
     if not args(1):
         i = 0
     else:
-        i =1
+        i = 1
     
     for tab in db.tables:
         if tab==args(i):
@@ -139,8 +141,7 @@ def admin():
         form = crud.create(tb)
         rows = db().select(tb.ALL) 
         items = SQLTABLE(rows,linkto='editar')
-        titulo = 'Inserir %s ' % args(i)        
-    
+        titulo = 'Inserir %s ' % args(i)
 
     return dict(form=form,items=items,titulo=titulo)
 

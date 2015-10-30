@@ -23,10 +23,25 @@ def m__T__(f):
 	return f
 
 # função fake/mock do URL
-def m__URL__(foo,**dfoo):
-	foo = 'http://'+str(foo)
-	for f in dfoo:
-		foo=foo+'/'+str(dfoo[f])
+# def m__URL__(foo,**dfoo):
+# 	foo = 'http://'+str(foo)
+# 	for f in dfoo:
+# 		foo=foo+'/'+str(dfoo[f])
+# 	return foo
+
+def m__URL__(a='', c='', f='', r='', args='', vars='', 
+	anchor='', extension='', env='', hmac_key='', hash_vars='', 
+	salt='', user_signature='', scheme='', host='', port='', 
+	encode_embedded_slash='', url_encode='', language=''):
+	
+	lfoo=[a,c,f,r,args,vars,anchor,extension,env,hmac_key,hash_vars,
+		salt,user_signature,scheme,host,port,encode_embedded_slash,url_encode,language]
+
+	foo = 'http://'
+	for f in lfoo:
+		if f != '':
+			foo=foo+str(f)+'/'
+
 	return foo
 
 # função fake/mock do IS_URL
@@ -35,7 +50,6 @@ def m__IS_URL__(foo,**dfoo):
 	if foo.startswith('http://') or foo.startswith('https://'):
 		return True
 	return False
-
 
 current.request = request = None
 current.response = response = None
@@ -58,6 +72,14 @@ deleteDB()
 db = DAL('sqlite://'+DB_PATH)
 
 
+
+
+import gluon.tools as gt
+from mock import Mock
+
+gt.URL=Mock(side_effect=m__URL__)
+
+crud = gt.Crud(db)
 
 
 # # Alguns imports globais do web2py

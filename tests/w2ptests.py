@@ -20,6 +20,8 @@ class W2PTestCase(TestCase):
 			c.URL=Mock(side_effect=m__URL__)
 			c.IS_URL=Mock(side_effect=m__IS_URL__)
 
+			c.crud=crud
+
 			c.request=Request() # = web2py 2.1.1
 			#c.request=Request({}) # > web2py 2.1.1
 			c.cache=Cache(request)

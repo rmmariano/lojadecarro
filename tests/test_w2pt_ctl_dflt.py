@@ -6,6 +6,9 @@ from w2ptests import W2PTestCase
 
 # importa os imports automáticos do web2py
 from global_imports import H1
+from global_imports import UL
+from global_imports import LI
+from global_imports import A
 
 # Importa o controller a ser testado
 import default
@@ -28,109 +31,89 @@ class TestCtlDefault(W2PTestCase):
 			carros.db[table_name].truncate()
 		carros.db.commit()
 
-	def test_index(self):	
-		# verificarRegistros(self)
+	# def test_index(self):
+	# 	inicializarDb(carros)
+	# 	query=default.db.carro.id>0
+	# 	rows=default.db(query).select(orderby=default.db.carro.id) 
+	# 	result=default.index()
+	# 	self.assertEqual(result['titulo'],'Ofertas')
+	# 	for row in rows:
+	# 		row_with_result_test(self,row,result)
 
+	# def test_carros(self):
+	# 	inicializarDb(carros)
+	# 	default.request.args.append('Novos')
+	# 	estado = default.request.args(0)
+	# 	query=default.db.carro.estado==estado[:-1].capitalize()  
+	# 	rows=default.db(query).select(orderby=default.db.carro.id)
+	# 	titulo='Carros %s' % estado.capitalize()
+	# 	result=default.carros()
+	# 	self.assertEqual(result['titulo'],titulo)
+	# 	for row in rows:
+	# 		row_with_result_test(self,row,result)
+
+	# def test_detalhes01(self):
+	# 	inicializarDb(carros)
+	# 	default.request.args.append('1')
+	# 	id = default.request.args(0)
+	# 	query=default.db.carro.id==int(id) 
+	# 	rows=default.db(query).select()
+	# 	row = rows[0]                  
+	# 	titulo = "%(marca)s - %(modelo)s - %(ano)s - %(estado)s" % \
+	# 	    dict(marca=row.marca.nome,modelo=row.modelo,ano=row.ano,estado=row.estado)
+	# 	result=default.detalhes()
+	# 	self.assertEqual(result['titulo'],titulo)
+	# 	row_with_result_test(self,row,result)
+
+	# def test_detalhes02(self):
+	# 	# Como o banco não foi inicializado, então não há registro 1
+	# 	default.request.args.append('1')
+	# 	result=default.detalhes()
+	# 	not_found=str(H1('Veículo não encontrado'))
+	# 	self.assertEqual(str(result['vitrine']),not_found)
+
+	# def test_pesquisa01(self):
+	# 	inicializarDb(carros)
+	# 	default.request.vars.busca = 'ummodeloquenaoexisteaqui'
+	# 	result=str(default.pesquisa())
+	# 	# Como foi passado um modelo que não existe, deve retornar '<ul></ul>'
+	# 	self.assertEqual(result,'<ul></ul>')
+
+	# def test_pesquisa02(self):
+	# 	inicializarDb(carros)
+	# 	# A busca é feita pelo modelo do carro, então passa um modelo existente
+	# 	default.request.vars.busca = 'modelo2'
+	# 	result=str(default.pesquisa())
+	# 	# Como só existe 1 carro com o modelo2, deve retornar 1 <li> com o modelo e ano do carro 
+	# 	foo = '<ul><li><a href="http://detalhes/2/">modelo2 - 1950</a></li></ul>'
+	# 	self.assertEqual(result,foo)
+
+	# def test_pesquisa03(self):
+	# 	# Como não identificou o tipo de busca, a função pesquisa() deve retornar ''
+	# 	result=default.pesquisa()
+	# 	self.assertEqual(result,'')
+
+	def test_admin01(self):
 		inicializarDb(carros)
+		result=default.admin()
+		# O result['items'] deve retornar um <li> com uma URL para cada tabela no DB
+		urls_dbs='<ul><li><a href="http://marca/">marca</a></li><li><a href="http://carro/">carro</a></li><li><a href="http://comprador/">comprador</a></li></ul>'
+		self.assertEqual(result['titulo'],'administração')
+		self.assertEqual(str(result['items']),urls_dbs)
 
-		query=default.db.carro.id>0
-		rows=default.db(query).select(orderby=default.db.carro.id) 
-		result=default.index()
-		self.assertEqual(result['titulo'],'Ofertas')
-		for row in rows:
-			row_with_result_test(self,row,result)
-
-	def test_carros(self):
-		# verificarRegistros(self)
-
+	def test_admin02(self):
 		inicializarDb(carros)
-
-		default.request.args.append('Novos')
-		estado = default.request.args(0)
-		query=default.db.carro.estado==estado[:-1].capitalize()  
-		rows=default.db(query).select(orderby=default.db.carro.id)
-		titulo='Carros %s' % estado.capitalize()
-		result=default.carros()
-		self.assertEqual(result['titulo'],titulo)
-		for row in rows:
-			row_with_result_test(self,row,result)
-
-	def test_detalhes01(self):
-		# verificarRegistros(self)
-
-		inicializarDb(carros)
-
-		default.request.args.append('1')
-		id = default.request.args(0)
-		query=default.db.carro.id==int(id) 
-		rows=default.db(query).select()
-		row = rows[0]                  
-		titulo = "%(marca)s - %(modelo)s - %(ano)s - %(estado)s" % \
-		    dict(marca=row.marca.nome,modelo=row.modelo,ano=row.ano,estado=row.estado)
-		result=default.detalhes()
-		self.assertEqual(result['titulo'],titulo)
-		row_with_result_test(self,row,result)
-
-	def test_detalhes02(self):
-		# verificarRegistros(self)
-		# inicializarDb(carros)
-
-		# Como o banco não foi inicializado, então não há registro 1
-		default.request.args.append('1') 
-		# id = default.request.args(0)
-		# query=default.db.carro.id==int(id) 
-		# rows=default.db(query).select()
-		result=default.detalhes()
-		not_found=str(H1('Veículo não encontrado'))
-		self.assertEqual(str(result['vitrine']),not_found)
-
-		# if not rows:
-		# 	not_found=str(H1('Veículo não encontrado'))
-		# 	self.assertEqual(str(result['vitrine']),not_found)
-		# else:
-		# 	# self.fail("test_detalhes02()")
-		# 	string = 'Rows is not empty: \n'
-		# 	for r in rows:
-		# 		string = string + str(r)
-		# 	raise TypeError(string)
-
-
-        
- #        #criação do formulário       
- #        form = SQLFORM(db.comprador,formstyle='divs',submit_button='Enviar')
-        
- #        #validação do formulário    
- #        if form.accepts(request.vars, session):
- #            response.flash = 'formulário aceito'
-            
- #            #alteração do formulário em caso de sucesso
- #            form = DIV(H3('Sua mensagem foi enviada, em breve entraremos em contato'))
-                
- #        elif form.errors:
- #            response.flash = 'formulário contém erros'
-                                        
- #        return dict(vitrine=vitrine,titulo=titulo,form=form)
-        
- #    else:
- #        return dict(vitrine=H1('Veículo não encontrado'))  
-
-
-
-
-
-	# def test_pesquisa(self):
-	# 	self.assertEqual('Text','Text')
-
-	# def test_admin(self):
-	# 	self.assertEqual('55','55')
+		result=default.admin()
+		# O result['items'] deve retornar um <li> com uma URL para cada tabela no DB
+		urls_dbs='<ul><li><a href="http://marca/">marca</a></li><li><a href="http://carro/">carro</a></li><li><a href="http://comprador/">comprador</a></li></ul>'
+		self.assertEqual(result['titulo'],'administração')
+		self.assertEqual(str(result['items']),urls_dbs)
 
 
 def inicializarDb(foo):
 	# o id dos registros começam do 1
-
 	id_marca1 = foo.db.marca.insert(nome="marca1")
 	id_marca2 = foo.db.marca.insert(nome="marca2")
-
 	foo.db.carro.insert(marca=id_marca1,modelo="modelo1",ano=1950,estado="Novo",
 						cor="Preto",valor=30000,descr="um carro preto novo",
 						itens=['item1','item2'])
