@@ -136,12 +136,12 @@ def admin():
     if args(0)=='editar':
         form = crud.update(tb, args(2),next=URL(f='admin',args=args(1)))
         items = None
-        titulo = 'Editar %s ' % args(i)
+        titulo = 'Editar %s' % args(i)
     else:
         form = crud.create(tb)
         rows = db().select(tb.ALL) 
         items = SQLTABLE(rows,linkto='editar')
-        titulo = 'Inserir %s ' % args(i)
+        titulo = 'Inserir %s' % args(i)
 
     return dict(form=form,items=items,titulo=titulo)
 

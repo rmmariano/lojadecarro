@@ -56,6 +56,7 @@ def import_classes(mod):
 	mod.Field=Field
 	mod.SQLDB=SQLDB
 	mod.SQLFORM=SQLFORM
+	mod.SQLTABLE=SQLTABLE
 
 def import_gluon_validators(mod):
 	mod.CLEANUP=CLEANUP

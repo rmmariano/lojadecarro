@@ -12,7 +12,7 @@ from gluon.cache import Cache
 from gluon.globals import Request, Response, Session
 from gluon.http import HTTP, redirect
 from gluon.sql import DAL, Field, SQLDB
-from gluon.sqlhtml import SQLFORM 
+from gluon.sqlhtml import SQLFORM,SQLTABLE
 from gluon.validators import * 
 from gluon.html import * 
 from gluon.globals import current
