@@ -3,12 +3,11 @@
 
 from common import *
 
-# Imports automáticos
-
 from os import path
 from os import remove
 from glob import glob
 
+# Imports automáticos
 from gluon.cache import Cache 
 from gluon.globals import Request, Response, Session
 from gluon.http import HTTP, redirect
@@ -16,11 +15,33 @@ from gluon.sql import DAL, Field, SQLDB
 from gluon.sqlhtml import SQLFORM 
 from gluon.validators import * 
 from gluon.html import * 
+from gluon.globals import current
 
-request = Request()
-response = Response()
-session = Session()
-cache = Cache(request)
+
+# função fake/mock do T
+def m__T__(f):
+	return f
+
+# função fake/mock do URL
+def m__URL__(foo,**dfoo):
+	foo = 'http://'+str(foo)
+	for f in dfoo:
+		foo=foo+'/'+str(dfoo[f])
+	return foo
+
+# função fake/mock do IS_URL
+def m__IS_URL__(foo,**dfoo):
+	foo = str(foo)
+	if foo.startswith('http://') or foo.startswith('https://'):
+		return True
+	return False
+
+
+current.request = request = Request()
+current.response = response = Response()
+current.session = session = Session()
+current.cache = cache = Cache(request)
+current.T = T = m__T__
 
 deleteDB()
 

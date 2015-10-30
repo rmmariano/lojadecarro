@@ -14,7 +14,7 @@ DB_NAME='db_test.sqlite'
 # Path do banco de testes (sem contar a raiz)
 DB_PATH='tests/'+DB_NAME
 
-def delete_file(filepath):
+def deleteFile(filepath):
     try:
         os_remove(filepath)
     except:
@@ -22,10 +22,15 @@ def delete_file(filepath):
 
 def deleteDB():
     # Exclui todos os arquivos da base de dados de teste que são temporários
-    delete_file(PROJECT_PATH+'/sql.log')
+    deleteFile(PROJECT_PATH+'/sql.log')
     files = glob(PROJECT_PATH+'/*.table')
     for f in files:
-        delete_file(f)
+        deleteFile(f)
     files = glob(PROJECT_PATH+'/'+DB_PATH+'*')
     for f in files:
-        delete_file(f)
+        deleteFile(f)
+
+
+
+
+# raise HTTP(404, "Object not found")
