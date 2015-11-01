@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+
 def VITRINE(rows):
     """Cria uma vitrine de carros baseando-se nos campos:
     id,foto,marca,modelo,ano,estado,cor,itens,desc,valor

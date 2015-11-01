@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+
 #########################################################################
 ## This is a samples controller
 ## - index is the default action of any application

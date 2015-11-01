@@ -1,7 +1,8 @@
 # coding: utf8
 
-# Se estiver em teste, faz os imports automáticos para inicializá-lo
-if 'db' not in globals():
+# Se estiver em ambiente de teste, cria temporariamente
+# as dependências em relação aos importes automáticos
+if 'db' not in locals():
     from global_imports import *
 
 
