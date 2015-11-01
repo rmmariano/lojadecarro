@@ -23,12 +23,6 @@ def m__T__(f):
 	return f
 
 # função fake/mock do URL
-# def m__URL__(foo,**dfoo):
-# 	foo = 'http://'+str(foo)
-# 	for f in dfoo:
-# 		foo=foo+'/'+str(dfoo[f])
-# 	return foo
-
 def m__URL__(a='', c='', f='', r='', args='', vars='', 
 	anchor='', extension='', env='', hmac_key='', hash_vars='', 
 	salt='', user_signature='', scheme='', host='', port='', 
@@ -44,12 +38,18 @@ def m__URL__(a='', c='', f='', r='', args='', vars='',
 
 	return foo
 
+
+# def IS_URL(error_message='Enter a valid URL', mode='http', allowed_schemes=None, 
+# 	prepend_scheme='http', allowed_tlds=None):
+# 	pass
+
 # função fake/mock do IS_URL
 def m__IS_URL__(foo,**dfoo):
 	foo = str(foo)
 	if foo.startswith('http://') or foo.startswith('https://'):
 		return True
 	return False
+
 
 current.request = request = None
 current.response = response = None
