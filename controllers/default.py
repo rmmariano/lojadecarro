@@ -1,6 +1,12 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+# Se estiver em ambiente de teste, cria temporariamente
+# as dependências em relação aos importes automáticos
+if 'db' not in locals():
+    from global_imports import *
+
+######################################################################
 
 #########################################################################
 ## This is a samples controller

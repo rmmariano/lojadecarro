@@ -1,5 +1,12 @@
 # -*- coding: utf-8 -*-
 
+# Se estiver em ambiente de teste, cria temporariamente
+# as dependências em relação aos importes automáticos
+if 'db' not in locals():
+    from global_imports import *
+
+######################################################################
+
 def VITRINE(rows):
     """Cria uma vitrine de carros baseando-se nos campos:
     id,foto,marca,modelo,ano,estado,cor,itens,desc,valor

@@ -32,7 +32,7 @@ if __name__=='__main__':
     result=TextTestRunner(verbosity=2).run(tests) 
     #result = TextTestRunner().run(tests)
     # Exclui o lixo que é criado temporariamente
-    deleteDB()    
+    #deleteDB()    
     # Se houver algum problema nos testes, fecha o programa
     if not result.wasSuccessful():
         sys_exit(1)

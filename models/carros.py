@@ -5,6 +5,7 @@
 if 'db' not in locals():
     from global_imports import *
 
+######################################################################
 
 e_m={
     'empty':'Este campo é obrigatório',
