@@ -15,7 +15,6 @@ DB_CARROS = carros.db
 class TestCtlDefault(W2PTestCase):
 	def setUp(self):
 		W2PTestCase.setUp(self,default,carros,vitrine)
-		#inicializarDb(carros)
 		construirDependencias()
 
 	def tearDown(self):

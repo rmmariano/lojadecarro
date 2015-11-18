@@ -12,6 +12,7 @@ cache/*
 temp.sqlite*
 dummy.db
 storage.sqlite
+arq_tree.txt*
 static/temp
 progress.log
 __pycache__/*
