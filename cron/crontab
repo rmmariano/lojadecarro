@@ -1,1 +1,2 @@
-#crontab
+*/1	*	*	*	*	root *applications/lojadecarro/cron/background.py
+*/1	*	*	*	*	root *applications/lojadecarro/modules/background.py
