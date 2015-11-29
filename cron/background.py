@@ -1,4 +1,5 @@
-
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
 
 from datetime import datetime
 from os import path as os_path
@@ -9,8 +10,8 @@ PROJECT_PATH=os_path.sep.join(os_path.abspath(__file__).split(os_path.sep)[:-2])
 now = datetime.now()
 s_now = str(now)
 
-filename = 'saida_cron_cron.txt'
-path = PROJECT_PATH+'/cron/'+filename
+filename = 'saida_cron.txt'
+path = PROJECT_PATH+'/modules/'+filename
 #path = '/docs/teste/'+filename
 
 if not os_path.exists(path):

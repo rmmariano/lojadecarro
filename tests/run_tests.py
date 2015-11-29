@@ -19,7 +19,7 @@ sys_path_append=sys_path.append
 os_path_abspath=os_path.abspath
 
 #adiciona no sys.path os diretorios que contém arquivos ou módulos a serem testados
-mods=['controllers','modules','models','tests']
+mods=['controllers','modules','models','tests','cron']
 for m in mods:
     sys_path_append(os_path_abspath(PROJECT_PATH+'/'+m))
 
