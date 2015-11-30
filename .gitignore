@@ -11,6 +11,8 @@ cache/*
 */db_test.sqlite*
 temp.sqlite*
 dummy.db
+.coverage
+coverage_report.txt
 storage.sqlite
 arq_tree.txt*
 static/temp

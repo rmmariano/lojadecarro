@@ -11,7 +11,7 @@ now = datetime.now()
 s_now = str(now)
 
 filename = 'saida_cron.txt'
-path = PROJECT_PATH+'/modules/'+filename
+path = PROJECT_PATH+'/cron/'+filename
 #path = '/docs/teste/'+filename
 
 if not os_path.exists(path):
