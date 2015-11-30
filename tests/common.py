@@ -12,7 +12,8 @@ ROOT_PATH=os_path.dirname(__file__)
 # Nome do banco de teste
 DB_NAME='db_test.sqlite'
 # Path do banco de testes (sem contar a raiz)
-DB_PATH='tests/'+DB_NAME
+#DB_PATH='tests/'+DB_NAME
+DB_PATH=ROOT_PATH+'/'+DB_NAME
 
 def deleteFile(filepath):
     try:
