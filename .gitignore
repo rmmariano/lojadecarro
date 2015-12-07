@@ -12,6 +12,7 @@ cache/*
 temp.sqlite*
 dummy.db
 .coverage
+coverageannotate/
 coverage_report.txt
 storage.sqlite
 arq_tree.txt*
